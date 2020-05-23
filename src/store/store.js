@@ -4,7 +4,7 @@ let globalState = {};
 let listeners = [];
 let actions = {};
 
-const useStore = () => {
+export const useStore = () => {
   const setState = useState(globalState)[1];
 
   useEffect(() => {
@@ -15,5 +15,14 @@ const useStore = () => {
     }
   }, [setState])
 
+  const dispatch = actionId => {
+    const newState = actions[actionId](globalState);
+    globalState = { ...globalState, ...newState };
 
+    listeners.forEach(listener => {
+      listener(globalState);
+    })
+  }
+
+  return [globalState, dispatch];
 }
