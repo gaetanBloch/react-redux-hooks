@@ -5,15 +5,15 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ProductsProvider from './context/products-context'
+import configureProductsStore from './store/products-store';
+
+configureProductsStore()
 
 ReactDOM.render(
   <React.StrictMode>
-    <ProductsProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ProductsProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
