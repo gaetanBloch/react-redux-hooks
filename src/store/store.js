@@ -12,8 +12,8 @@ export const useStore = () => {
 
     return () => {
       listeners = listeners.filter(listener => listener !== setState);
-    }
-  }, [setState])
+    };
+  }, [setState]);
 
   const dispatch = actionId => {
     const newState = actions[actionId](globalState);
@@ -21,8 +21,15 @@ export const useStore = () => {
 
     listeners.forEach(listener => {
       listener(globalState);
-    })
-  }
+    });
+  };
 
   return [globalState, dispatch];
-}
+};
+
+export const initStore = (userActions, initialState) => {
+  if (initialState) {
+    globalState = { ...globalState, ...initialState };
+  }
+  actions = { ...actions, ...userActions };
+};
