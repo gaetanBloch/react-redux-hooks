@@ -1,27 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { combineReducers, createStore } from 'redux';
-import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import productReducer from './store/reducers/products';
-
-const rootReducer = combineReducers({
-  shop: productReducer
-});
-
-const store = createStore(rootReducer);
+import ProductsProvider from './context/products-context'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <ProductsProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </Provider>
+    </ProductsProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
