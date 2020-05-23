@@ -15,8 +15,8 @@ export const useStore = () => {
     };
   }, [setState]);
 
-  const dispatch = actionId => {
-    const newState = actions[actionId](globalState);
+  const dispatch = (actionId, payload) => {
+    const newState = actions[actionId](globalState, payload);
     globalState = { ...globalState, ...newState };
 
     listeners.forEach(listener => {
